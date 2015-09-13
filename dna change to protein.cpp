@@ -1,123 +1,114 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <iomanip>
+#include<cstring>
 using namespace std;
 
-char change(string codon){
+char changeSymbol (string codon){  													//function to declare all symbol
 	char symbol;
-	if (codon=="ATT" || codon=="ATC" || codon=="ATA")
-	{
-		symbol='I';
+	string str1, str2, str3, str4, str5, str6, str7, str8, str9, str10;
+str1="AGG"; str2="AAA"; str3="AGC"; str4="AGA"; str5="ATT"; str6="ACT"; str7="AAT"; str8="TAC"; str9="CCT", str10="AGG";
+	if (codon==str1 || codon==str4 || codon==str10){
+		symbol='R';
+		return symbol;
 	}
-	else if (codon=="CTT" || codon=="CTC" || codon=="CTA" || codon=="CTG" )
-	{
+	else if (codon==str2){
 		symbol='K';
+		return symbol;
+	}
+	else if (codon==str3){
+		symbol='S';
+		return symbol;
+	}
+	else if (codon==str5){
+		symbol='I';
+		return symbol;
+	}
+	else if (codon==str6){
+		symbol='T';
+		return symbol;
+	}
+	else if(codon==str7){
+		symbol='N';
+		return symbol;
+	}
+	else if (codon==str8){
+		symbol='Y';
+		return symbol;
+	}
+	else if (codon==str9){
+		symbol='P';
+		return symbol;
 	}
 	else{
-		symbol='L';
+		symbol='X';
+		return symbol;
 	}
-	return symbol;
 }
 
-string aminoAcid (char symbol){
+string changeAmino(char symbol){							//function to declare all amino acid based on the symbol
 	string amino;
-	if (symbol=='I'){
-		amino="isoleucine";
+	if (symbol=='R'){
+		amino="Arginine";
+		return amino;
 	}
-	else if (symbol=='K'){
-		amino="leucine";
+	else if(symbol=='K'){
+		amino="Lysine";
+		return amino;
 	}
-	else {
-		amino="potassium";
+	else if(symbol=='S'){
+		amino="Serine";
+		return amino;
 	}
-	return amino;
+	else if(symbol=='I'){
+		amino="Isoleucine";
+		return amino;
+	}
+	else if(symbol=='T'){
+		amino="Threonine";
+		return amino;
+	}
+	else if(symbol=='N'){
+		amino="Asparagine";
+		return amino;
+	}
+	else if(symbol=='Y'){
+		amino="Tyrosine";
+		return amino;
+	}
+	else if (symbol=='P'){
+		amino="Proline";
+		return amino;
+	}
+	else{
+		amino="wrong amino";
+		return amino;
+	}
 }
-
-/*
-void symbol(char dna[codon][nucleotide])
-{
-	for (int i=0;)
-}
-*/
 
 int main(){
 ifstream inputfile;
 ofstream outputfile;
-//int codon=10;
-int nucleotide=21;
-//char dna[codon][nucleotide];
-char dna[nucleotide],symbol;
-string codon, amino;
+string nucleotide, amino;
+char symbol;
 
 cout<<"your dna sequence is: ";
 inputfile.open("data.txt");
-for (int i=0; i<21; i++)
-{
-	 inputfile>>dna[i];
-	 cout<<dna[i];
-}
-cout<<endl;
-for (int i=0; i<3; i++)
-{
-	 inputfile>>dna[i];
-} 
-	string str(dna);
-	 symbol=change(str);
-	 amino=aminoAcid(symbol);
-	 cout<<symbol<<" - "<<amino;
-/*
-for (int i=3; i<6; i++)
-{
-	 inputfile>>dna[i];
-}  
- string str(dna);
-	 symbol=change(str);
-	 amino=aminoAcid(symbol);
-	 cout<<symbol<<" - "<<amino;*/
-		 /*
- if (str=="aaa")
-	 {
-	 	codon="Q";
-	 }
-	 else if (str=="bbb"){
-	 	codon="W";
-	 }
-cout<<codon;
-
-for (int i=3; i<6; i++)
-{
-	 string str(dna);
-	 if (str=="aaa")
-	 {
-	 	codon="Q";
-	 }
-	 else if (str=="bbb"){
-	 	codon="W";
-	 }
-cout<<codon;
-} 
-*/
-/*
-cout<<"your dna sequence is: ";
-for (int i=0; i<10;i++)
-{
-	for (int j=0;j<3;j++){
-	inputfile>>dna[i][j];
-	}
-}
-*/
+inputfile>>nucleotide;															//input data from input file
+cout<<nucleotide<<endl<<endl<<"you can open result.txt to view the result";
 inputfile.close();
-/*
-for (int i=0; i<10;i++)
-{
-	for (int j=0;j<3;j++){
-cout<<dna[i][j];
-	}
+
+outputfile.open("result.txt");							
+outputfile<<"your dna sequence is: "<<nucleotide<<endl;							//output data into output file
+outputfile<<"codon"<<"\t"<<"symbol"<<"\t"<<"amino acid"<<endl;					
+for (int j=0; j<nucleotide.length(); j+=3){
+	string codon = nucleotide.substr(j,3);										//verify 3 codon in dna sequence
+	symbol=changeSymbol(codon);
+	amino=changeAmino(symbol);
+	outputfile<<codon<<"\t"<<symbol<<"\t"<<amino<<endl;
 }
-*/
-
-//symbol (dna[codon][nucleotide]);
-
+outputfile.close();
 return 0;
 }
 

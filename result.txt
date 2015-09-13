@@ -1,0 +1,12 @@
+your dna sequence is: AGGAAAAGCAGAATTACTAATTACCCTAGG
+codon	symbol	amino acid
+AGG	R	Arginine
+AAA	K	Lysine
+AGC	S	Serine
+AGA	R	Arginine
+ATT	I	Isoleucine
+ACT	T	Threonine
+AAT	N	Asparagine
+TAC	Y	Tyrosine
+CCT	P	Proline
+AGG	R	Arginine
